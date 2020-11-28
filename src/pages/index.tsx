@@ -1,8 +1,8 @@
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 import { client } from "../lib/prismic";
 import Prismic from "prismic-javascript";
 import { Document } from "prismic-javascript/types/documents";
+import Link from "next/link";
 import PrismicDOM from "prismic-dom";
 import { stringify } from "querystring";
 

@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    margin-top: 32px;
     background: #494949;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     width: 256px;
+    min-width: 256px;
     min-height: 672px;
     padding: 16px;
-    max-height: 80vh;
+    max-height: 768px;
 
     display: flex;
     flex-flow: column;
     align-items: center;
+
+    margin-bottom: 32px;
 
     & > div {
         margin-top: 16px;

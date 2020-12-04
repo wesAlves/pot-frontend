@@ -5,9 +5,7 @@ export const Container = styled.div`
     width: 1280px;
     height: 100vh;
     display: flex;
-    /* overflow: hidden; */
-    /* align-items: center; */
-    /* justify-content: space-between; */
+    padding: 32px;
 `;
 
 export const Title = styled.h1`

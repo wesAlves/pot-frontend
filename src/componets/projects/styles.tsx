@@ -5,13 +5,19 @@ export const Container = styled.div`
     min-height: 320px;
     height: 340px;
     /* padding: 16px; */
-    margin-left: 32px;
+    /* margin-left: 32px; */
+    /* padding: 0 32px; */
     flex: 1;
-    margin-top: 32px;
+    /* margin-top: 32px; */
     background: #494949;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     overflow: hidden;
+    flex: 1;
+
+    & + & {
+        margin-top: 32px;
+    }
 `;
 
 export const Title = styled.h2`

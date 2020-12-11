@@ -1,27 +1,18 @@
-import { useEffect } from "react";
-import { useState } from "react";
-
 interface IModalProps {
-    // isVisible?: boolean;
+    isVisible: boolean;
     title: string;
-    isActive: boolean;
-    imglink: string;
 
-    closeModal: (id: number) => void;
+    children?: React.ReactNode;
+
+    closeModal: () => void;
 }
 
 export default function Modal(props: IModalProps) {
-    const [isOpen, setOpen] = useState(false);
-
-    useEffect(() => {
-        setOpen(props.isActive);
-    }, [props.isActive]);
-
     const closeModal = () => {
-        props.closeModal(-1);
+        props.closeModal();
     };
 
-    if (!isOpen) {
+    if (!props.isVisible) {
         return null;
     }
 
@@ -55,10 +46,9 @@ export default function Modal(props: IModalProps) {
                     zIndex: 3,
                 }}
             >
-                <h1>{props.title}</h1>
-                <button onClick={closeModal}>Click</button>
+                <h1>{props.children}</h1>
 
-                <img src={props.imglink} alt="" />
+                {/* <button onClick={handleVisibility}>Click</button> */}
             </div>
         </div>
     );

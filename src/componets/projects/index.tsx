@@ -5,8 +5,11 @@ import { Container, Jobs, JobsContainer, Title } from "./styles";
 import Carousel from "react-elastic-carousel";
 import { useState } from "react";
 import Modal from "../modal";
+import { title } from "process";
 
 export default function Projects() {
+    const [activeModal, setActiveModal] = useState(-1);
+
     const [carousel, setCarrousel] = useState([
         {
             id: 1,
@@ -25,13 +28,15 @@ export default function Projects() {
         { id: 5, title: "item #5" },
     ]);
 
-    const [isVisible, setVisible] = useState(false);
-
-    const handleModal = () => {
-        const toggleVisibility = !isVisible;
-
-        setVisible(toggleVisibility);
-        console.log(isVisible);
+    const handleOpen = (id: number) => {
+        setActiveModal(id);
+        // const toggleVisibility = !isVisible;
+        // setVisible(toggleVisibility);
+    };
+    const handleClose = (id: number) => {
+        setActiveModal(id);
+        // const toggleVisibility = !isVisible;
+        // setVisible(toggleVisibility);
     };
 
     return (
@@ -45,14 +50,19 @@ export default function Projects() {
                     itemPadding={[0, 8]}
                 >
                     {carousel.map((item) => {
+                        const itemTitle = item.title;
                         return (
                             <Jobs key={item.id}>
-                                <button onClick={handleModal}>
-                                    {item.title}
+                                <button onClick={() => handleOpen(item.id)}>
+                                    {itemTitle}
                                 </button>
-                                <img src={item.link} alt="" />
+                                <img
+                                    onClick={() => handleOpen(item.id)}
+                                    src={item.link}
+                                    alt=""
+                                />
                                 <div>
-                                    <h3>{item.title}</h3>
+                                    <h3>{itemTitle}</h3>
                                     <Icons
                                         style={{
                                             marginTop: "0",
@@ -71,12 +81,11 @@ export default function Projects() {
                                     </Icons>
                                 </div>
                                 <Modal
-                                    isVisible={isVisible}
-                                    closeModal={handleModal}
-                                    // title={item.title}
-                                >
-                                    {item.title}
-                                </Modal>
+                                    isActive={activeModal === item.id}
+                                    closeModal={handleClose}
+                                    title={itemTitle}
+                                    imglink={item.link}
+                                />
                             </Jobs>
                         );
                     })}

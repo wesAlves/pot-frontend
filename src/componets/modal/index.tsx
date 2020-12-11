@@ -55,10 +55,75 @@ export default function Modal(props: IModalProps) {
                     zIndex: 3,
                 }}
             >
-                <h1>{props.title}</h1>
-                <button onClick={closeModal}>Click</button>
-
-                <img src={props.imglink} alt="" />
+                <h1
+                    style={{
+                        width: "100%",
+                        height: "10%",
+                        padding: "24px 16px 0",
+                        color: "#FFB800",
+                    }}
+                >
+                    {props.title}
+                </h1>
+                <button
+                    onClick={closeModal}
+                    style={{
+                        position: "absolute",
+                        right: "16px",
+                        top: "16px",
+                        background: "none",
+                        border: "none",
+                        padding: "8px",
+                        color: "#ff0000",
+                        cursor: "pointer",
+                    }}
+                >
+                    X
+                </button>
+                <div
+                    style={{
+                        width: "calc(100% - 32px)",
+                        margin: "auto 16px",
+                        height: "72%",
+                        overflow: "hidden",
+                        borderRadius: "",
+                    }}
+                >
+                    <img
+                        src={props.imglink}
+                        alt=""
+                        style={{
+                            width: "100%",
+                        }}
+                    />
+                </div>
+                <div
+                    style={{
+                        width: "100%",
+                        padding: "0 16px",
+                        marginTop: "16px",
+                    }}
+                >
+                    <p
+                        style={{
+                            fontSize: "24px",
+                            color: "#aaa",
+                            margin: "16px 0",
+                        }}
+                    >
+                        25/11/2020 - Nome do projeto
+                    </p>
+                    <p
+                        style={{
+                            fontSize: "16px",
+                            color: "#aaa",
+                            margin: "8px 0",
+                        }}
+                    >
+                        Ferramentas utilizadas
+                    </p>
+                    <p>icons</p>
+                </div>
             </div>
         </div>
     );

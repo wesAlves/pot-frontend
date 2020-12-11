@@ -53,9 +53,9 @@ export default function Projects() {
                         const itemTitle = item.title;
                         return (
                             <Jobs key={item.id}>
-                                <button onClick={() => handleOpen(item.id)}>
+                                {/* <button onClick={() => handleOpen(item.id)}>
                                     {itemTitle}
-                                </button>
+                                </button> */}
                                 <img
                                     onClick={() => handleOpen(item.id)}
                                     src={item.link}

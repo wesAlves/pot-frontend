@@ -3,9 +3,9 @@ import { useState } from "react";
 
 interface IModalProps {
     // isVisible?: boolean;
-    title: string;
-    isActive: boolean;
-    imglink: string;
+    title?: string;
+    isActive?: boolean;
+    imglink?: string;
 
     closeModal: (id: number) => void;
 }
@@ -26,10 +26,24 @@ export default function Modal(props: IModalProps) {
     }
 
     return (
-        <div>
+        <div
+            style={{
+                position: "absolute",
+                zIndex: "3",
+                // background: "#f00",
+                top: "0",
+                left: "0",
+                width: "100vw",
+                height: " 100vh",
+                overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
             <div
                 style={{
-                    position: "fixed",
+                    position: "absolute",
                     top: 0,
                     left: 0,
                     right: 0,
@@ -37,17 +51,17 @@ export default function Modal(props: IModalProps) {
                     background: "#0003",
                     width: "100vw",
                     height: " 100vh",
-                    zIndex: 2,
+                    // zIndex: 2,
                 }}
                 onClick={closeModal}
             ></div>
             <div
                 style={{
-                    position: "fixed",
-                    top: "50vh",
-                    left: "50vw",
-                    marginTop: "-20%",
-                    marginLeft: "-25vw",
+                    // position: "fixed",
+                    // top: "50vh",
+                    // left: "50vw",
+                    // marginTop: "-20%",
+                    // marginLeft: "-25vw",
                     width: "50vw",
                     background: "#fff",
                     height: " 768px",
@@ -124,6 +138,18 @@ export default function Modal(props: IModalProps) {
                     </p>
                     <p>icons</p>
                 </div>
+            </div>
+            <div
+                style={{
+                    width: "25vw",
+                    marginLeft: "32px",
+                    background: "#fff",
+                    height: " 768px",
+                    borderRadius: "16px",
+                    zIndex: 3,
+                }}
+            >
+                Description here
             </div>
         </div>
     );

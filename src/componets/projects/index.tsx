@@ -4,7 +4,7 @@ import { Icons } from "../profile/styles";
 import { Container, Jobs, JobsContainer, Title } from "./styles";
 import Carousel from "react-elastic-carousel";
 import { useState } from "react";
-import Modal from "../modal";
+import Modal from "./detail";
 
 interface IModalData {
     id: number;

@@ -46,7 +46,6 @@ export default function Projects({ pieces, project }: PiecesPropos) {
                 Prismic.Predicates.at("document.type", "pieces"),
                 Prismic.Predicates.at("my.pieces.project", projects.id),
             ]);
-            // console.log(pieces.results);
 
             setCarrousel(pieces.results);
         };
@@ -68,10 +67,8 @@ export default function Projects({ pieces, project }: PiecesPropos) {
         <>
             <Container>
                 <Title>{project.data.title[0].text}</Title>
-                {/* {console.log(pieces)} */}
                 <JobsContainer>
                     <Carousel
-                        // className={"carouselClass"}
                         focusOnSelect={true}
                         itemsToShow={3}
                         itemPadding={[0, 8]}
@@ -88,7 +85,9 @@ export default function Projects({ pieces, project }: PiecesPropos) {
                                     <img
                                         onClick={() =>
                                             handleOpen({
-                                                ...piece,
+                                                link: piece.data.image.url,
+                                                id: piece.id,
+                                                title: piece.uid,
                                             })
                                         }
                                         src={ThumbImage}

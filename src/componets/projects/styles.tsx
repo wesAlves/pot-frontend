@@ -32,9 +32,10 @@ export const Title = styled.h2`
     color: #ffb800;
 `;
 
-export const JobsContainer = styled.ul.attrs((props) => ({
-    className: props.className,
-}))`
+// export const JobsContainer = styled.ul.attrs((props) => ({
+//     className: props.className,
+// }))`
+export const JobsContainer = styled.ul`
     display: flex;
     overflow: hidden;
     width: 100%;

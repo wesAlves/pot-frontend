@@ -1,11 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { client } from "../../../lib/prismic";
-import Prismic from "prismic-javascript";
-import { Document } from "prismic-javascript/types/documents";
 import React from "react";
-import PrismicDOM from "prismic-dom";
+import { Document } from "prismic-javascript/types/documents";
 import Link from "next/link";
+import Prismic from "prismic-javascript";
+import PrismicDOM from "prismic-dom";
+import { client } from "../../../lib/prismic";
 
 interface CateroryProps {
     products: Document[];

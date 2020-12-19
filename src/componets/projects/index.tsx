@@ -1,10 +1,20 @@
 import React from "react";
+import { useState } from "react";
+
+import Carousel from "react-elastic-carousel";
+
+import Prismic from "prismic-javascript";
+import { Document } from "prismic-javascript/types/documents";
+import { client } from "../../lib/prismic";
+
 import { SiAdobeillustrator, SiAdobephotoshop } from "react-icons/si";
 import { Icons } from "../profile/styles";
+
 import { Container, Jobs, JobsContainer, Title } from "./styles";
-import Carousel from "react-elastic-carousel";
-import { useState } from "react";
+
 import Modal from "./detail";
+import { useEffect } from "react";
+import { GetStaticProps } from "next";
 
 interface IModalData {
     id: number;
@@ -12,28 +22,36 @@ interface IModalData {
     link: string;
 }
 
-export default function Projects() {
+// interface IProjectsDataProps {
+//     project: Document[];
+// }
+
+interface PiecesPropos {
+    pieces: Document[];
+    project: Document;
+}
+
+export default function Projects({ pieces, project }: PiecesPropos) {
     const [activeModal, setActiveModal] = useState(-1);
 
-    const [carousel, setCarrousel] = useState([
-        {
-            id: 1,
-            title: "item #1",
-            link:
-                "https://images.unsplash.com/photo-1576509147359-41e7cef459b9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=340&q=80",
-        },
-        {
-            id: 2,
-            title: "item #2",
-            link:
-                "https://images.unsplash.com/photo-1602524821041-4ca34980d066?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-        },
-        { id: 3, title: "item #3" },
-        { id: 4, title: "item #4" },
-        { id: 5, title: "item #5" },
-    ]);
+    const [carousel, setCarrousel] = useState([]);
 
-    const [modalData, setModalData] = useState<IModalData>({});
+    const [modalData, setModalData] = useState<IModalData>([]);
+
+    useEffect(() => {
+        const getPieces = async (uid) => {
+            const projects = await client().getByUID("projects", uid, {});
+
+            const pieces = await client().query([
+                Prismic.Predicates.at("document.type", "pieces"),
+                Prismic.Predicates.at("my.pieces.project", projects.id),
+            ]);
+            // console.log(pieces.results);
+
+            setCarrousel(pieces.results);
+        };
+        getPieces(project.uid);
+    }, []);
 
     const handleOpen = (itemData: IModalData) => {
         setActiveModal(itemData.id);
@@ -49,32 +67,35 @@ export default function Projects() {
     return (
         <>
             <Container>
-                <Title>Projects</Title>
+                <Title>{project.data.title[0].text}</Title>
+                {/* {console.log(pieces)} */}
                 <JobsContainer>
                     <Carousel
-                        className={"carouselClass"}
+                        // className={"carouselClass"}
                         focusOnSelect={true}
                         itemsToShow={3}
                         itemPadding={[0, 8]}
                     >
-                        {carousel.map((item: IModalData) => {
-                            const itemTitle = item.title;
+                        {carousel.map((piece, index) => {
+                            const title = piece.uid;
+
+                            // console.log(piece.data.image.thumb.url);
+
+                            const ThumbImage = piece.data.image.thumb.url;
+
                             return (
-                                <Jobs key={item.id}>
-                                    {/* <button onClick={() => handleOpen(item.id)}>
-                                    {itemTitle}
-                                </button> */}
+                                <Jobs key={piece.uid}>
                                     <img
                                         onClick={() =>
                                             handleOpen({
-                                                ...item,
+                                                ...piece,
                                             })
                                         }
-                                        src={item.link}
+                                        src={ThumbImage}
                                         alt=""
                                     />
                                     <div>
-                                        <h3>{itemTitle}</h3>
+                                        <h3>{title}</h3>
                                         <Icons
                                             style={{
                                                 marginTop: "0",
@@ -109,3 +130,20 @@ export default function Projects() {
         </>
     );
 }
+
+// export const getStaticProps: GetStaticProps = async (Context):PiecesPropos => {
+//     const projects = await client().getByUID("projects", , {});
+
+//     const pieces = await client().query([
+//         Prismic.Predicates.at("document.type", "pieces"),
+//         Prismic.Predicates.at("my.project.piece", projects.id),
+//     ]);
+
+//     console.log("terra");
+//     return {
+//         props: {
+//             projects,
+//             pieces: pieces.results,
+//         },
+//     };
+// };

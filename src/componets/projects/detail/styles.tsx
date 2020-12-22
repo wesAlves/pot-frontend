@@ -90,11 +90,13 @@ export const DescriptionStageDiv = styled.div`
     width: 25vw;
     margin-left: 32px;
     background: #fff;
+    min-height: 220px;
     height: fit-content;
     margin-bottom: 64px;
     border-radius: 16px;
     align-self: flex-start;
     z-index: 3;
+    margin-bottom: 8px;
 `;
 
 export const ProjectTitle = styled.h1`

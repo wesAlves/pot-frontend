@@ -14,18 +14,16 @@ import { Container, Jobs, JobsContainer, Title } from "./styles";
 
 import Modal from "./detail";
 import { useEffect } from "react";
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 interface IModalData {
     id: number;
     title: string;
-    link: string;
+    description: string;
+    date: string;
+    extenalLink: string;
+    imglink: string;
 }
-
-// interface IProjectsDataProps {
-//     project: Document[];
-// }
-
 interface PiecesPropos {
     pieces: Document[];
     project: Document;
@@ -75,19 +73,27 @@ export default function Projects({ pieces, project }: PiecesPropos) {
                     >
                         {carousel.map((piece, index) => {
                             const title = piece.uid;
-
-                            // console.log(piece.data.image.thumb.url);
-
                             const ThumbImage = piece.data.image.thumb.url;
+                            let altImage = "";
+                            let descriptionImage = "";
+
+                            if (piece.data.description[0]) {
+                                console.log(piece.data.description[0].text);
+                                descriptionImage =
+                                    piece.data.description[0].text;
+                            }
 
                             return (
                                 <Jobs key={piece.uid}>
                                     <img
                                         onClick={() =>
                                             handleOpen({
-                                                link: piece.data.image.url,
+                                                imglink: piece.data.image.url,
                                                 id: piece.id,
                                                 title: piece.uid,
+                                                description: descriptionImage,
+                                                date: "21-11-2000",
+                                                extenalLink: "fala comigo",
                                             })
                                         }
                                         src={ThumbImage}
@@ -124,25 +130,24 @@ export default function Projects({ pieces, project }: PiecesPropos) {
                 isActive={activeModal === modalData.id}
                 closeModal={handleClose}
                 title={modalData.title}
-                imglink={modalData.link}
+                imglink={modalData.imglink}
+                description={modalData.description}
+                date={modalData.date}
+                extenalLink={modalData.extenalLink}
             />
         </>
     );
 }
 
-// export const getStaticProps: GetStaticProps = async (Context):PiecesPropos => {
-//     const projects = await client().getByUID("projects", , {});
+// export const getStaticProps: GetStaticProps = async (context) => {
+//     const projects = await client().getByUID("projects", uid, {});
 
 //     const pieces = await client().query([
 //         Prismic.Predicates.at("document.type", "pieces"),
-//         Prismic.Predicates.at("my.project.piece", projects.id),
+//         Prismic.Predicates.at("my.pieces.project", projects.id),
 //     ]);
 
-//     console.log("terra");
 //     return {
-//         props: {
-//             projects,
-//             pieces: pieces.results,
-//         },
+//         props: {},
 //     };
 // };

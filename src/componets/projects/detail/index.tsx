@@ -13,10 +13,13 @@ import {
 } from "./styles";
 
 interface IModalProps {
-    // isVisible?: boolean;
-    title?: string;
     isActive?: boolean;
+
+    title?: string;
     imglink?: string;
+    description: string;
+    date: string;
+    extenalLink: string;
 
     closeModal: (id: number) => void;
 }
@@ -47,7 +50,7 @@ export default function Modal(props: IModalProps) {
                         <img src={props.imglink} alt="" />
                     </ImgContainer>
                     <TextContainer>
-                        <h4>25/11/2020 - Nome do projeto</h4>
+                        <h4>{props.date} - Nome do projeto</h4>
                         <p>Ferramentas utilizadas</p>
                         <p>icons</p>
                     </TextContainer>
@@ -55,20 +58,7 @@ export default function Modal(props: IModalProps) {
                 <DescriptionStageDiv>
                     <DescriptionTitle>Descrição do projeto</DescriptionTitle>
                     <TextContainer>
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
-                        </p>
+                        <p>{props.description}</p>
                     </TextContainer>
                     <h4
                         style={{
@@ -80,7 +70,9 @@ export default function Modal(props: IModalProps) {
                     >
                         Links para aplicação publicada.
                     </h4>
-                    <a href="#">Link</a>
+                    <a style={{ padding: "16px", display: "block" }} href="#">
+                        {props.extenalLink}
+                    </a>
                 </DescriptionStageDiv>
             </div>
         </Container>

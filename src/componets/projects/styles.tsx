@@ -15,9 +15,7 @@ export const Container = styled.div`
     overflow: hidden;
     flex: 1;
 
-    & + & {
-        margin-top: 32px;
-    }
+    margin-bottom: 32px;
 `;
 
 export const Title = styled.h2`
